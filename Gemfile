@@ -27,7 +27,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', require: false
 end
 
 group :test, :development do 

@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "requires an email" do 
+    user = FactoryGirl.build(:user, email: nil)
+    expect{ user.save! }.to raise_error
+  end
 end
