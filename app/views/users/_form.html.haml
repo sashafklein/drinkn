@@ -1,0 +1,19 @@
+= form_for @user, :html => { :class => "form-horizontal" } do |f|
+  -if @user.errors.any?
+    .alert.alert-danger.alert-dismissable
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+      %h4= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  = render 'layouts/form_group', form: f, attribute: :first_name, field_type: :text_field
+
+  = render 'layouts/form_group', form: f, attribute: :last_name, field_type: :text_field
+
+  = render 'layouts/form_group', form: f, attribute: :email, field_type: :text_field
+  
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit :class => 'btn btn-primary'

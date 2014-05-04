@@ -1,0 +1,4 @@
+.form-group
+  = form.label attribute, :class => 'col-sm-2 control-label'
+  .col-sm-10
+    = form.send(field_type, attribute, :class => 'form-control')

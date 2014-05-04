@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
 
   has_many :visits
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def admin?
     role == 'admin'
   end

@@ -1,0 +1,10 @@
+.page-header
+  = link_to @user, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-info-sign
+    Show
+  = link_to edit_user_password_path, class: 'btn btn-primary' do 
+    %span.glyphicon.glyphicon-lock
+    Edit Password
+  %h1 Editing #{@user.name}
+
+= render 'form'
