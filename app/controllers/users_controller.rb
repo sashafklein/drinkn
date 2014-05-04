@@ -46,7 +46,7 @@ class UsersController < MainController
   private
 
   def load_user
-    @user = User.find params.permit(:id)
+    @user = User.find params[:id]
   end
 
   def user_params
