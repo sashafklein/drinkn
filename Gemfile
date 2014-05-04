@@ -13,6 +13,7 @@ gem 'ahoy_matey'
 gem 'devise'
 gem 'sass-rails', '~> 4.0.0'
 gem 'cancancan'
+gem 'bootstrap-generators', '~> 3.1.1' 
 
 group :assets do 
   gem 'uglifier', '>= 1.3.0'

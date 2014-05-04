@@ -1,3 +1,2 @@
-- flash.each do |type, value|
-  .flash-container{ class: type }
-    .flash-content= value
+- flash.each do |value, msg|
+  = content_tag :div, :class => "alert alert-#{value == :error ? "danger" : "success" }"

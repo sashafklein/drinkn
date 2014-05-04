@@ -4,6 +4,7 @@
 
   %body
     = render 'layouts/header'
-    = render 'layouts/flash'
-    %div{ class: auto_class }= yield
+    .container
+      = render 'layouts/flash'
+      %div{ class: auto_class }= yield
     = render 'layouts/footer'

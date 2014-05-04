@@ -1,36 +1,24 @@
-%nav.navbar.navbar-default{role: "navigation"}
-  .container-fluid
+.navbar.navbar-inverse.navbar-fixed-top
+  .container
     .navbar-header
-      %button.navbar-toggle{"data-target" => "#link-collapse", "data-toggle" => "collapse", type: "button"}
+      %button.navbar-toggle{type: "button", data: {toggle: "collapse", target: ".navbar-collapse"} }
         %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{href: "#"} Brand
-    #link-collapse.collapse.navbar-collapse
+      = link_to "Vanilla", "#", class: "navbar-brand"
+    .collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li.active
-          %a{href: "#"} Link
+          %a{href: "/"} Home
         %li
-          %a{href: "#"} Link
-      %form.navbar-form.navbar-left{role: "search"}
-        .form-group
-          %input.form-control{placeholder: "Search", type: "text"}/
-        %button.btn.btn-default{type: "submit"} Submit
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{href: "#"} Link
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
-            Dropdown
-            %b.caret
-          %ul.dropdown-menu
-            %li
-              %a{href: "#"} Action
-            %li
-              %a{href: "#"} Another action
-            %li
-              %a{href: "#"} Something else here
-            %li.divider
-            %li
-              %a{href: "#"} Separated link
+          %a{href: "#about"} About
+      %ul.nav.navbar-nav.pull-right
+        - if signed_in?
+          %li
+            = link_to 'Sign Out', destroy_user_session_path, method: :delete
+        - else
+          %li
+            = link_to 'Sign In', new_user_session_path
+          %li
+            = link_to 'Sign Up', new_user_registration_path
