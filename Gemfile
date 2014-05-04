@@ -12,7 +12,6 @@ gem 'active_model_serializers'
 gem 'ahoy_matey'
 gem 'devise'
 gem 'sass-rails', '~> 4.0.0'
-gem 'haml_converter', git: 'git://github.com/sashafklein/haml_converter.git'
 gem 'cancancan'
 
 group :assets do 

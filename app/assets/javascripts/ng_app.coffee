@@ -9,7 +9,7 @@
 angular.module('Common', [])
 angular.module('Models', [])
 
-@ngApp = angular.module("NgApp", [
+@ngApp = angular.module("ngApp", [
   "Models"
 ]).config ($compileProvider) ->
   # Prevent angular from marking links with a variety of protocols "unsafe"

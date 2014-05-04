@@ -1,5 +1,19 @@
 class ApiController < ApplicationController
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :null_session
+  
+  respond_to :json
+
+  private
+  
+  def permission_denied_error
+    error(403, 'Permission Denied!')
+  end
+
+  def error(status, message = 'Something went wrong')
+    response = {
+      response_type: "ERROR",
+      message: message
+    }
+
+    render json: response.to_json, status: status
+  end
 end
