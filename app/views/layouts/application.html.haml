@@ -1,17 +1,9 @@
 !!!
 %html
-  %head
-    %title Vanilla Rails App Template
-    = stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
-    = stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
-    = javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
-    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
-    %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
-    = csrf_meta_tags
+  = render 'layouts/head'
 
   %body
     = render 'layouts/header'
     = render 'layouts/flash'
-    %div{ class: "#{controller.params['controller']}-controller #{controller.params['action']}-action" }= yield
+    %div{ class: auto_class }= yield
     = render 'layouts/footer'
