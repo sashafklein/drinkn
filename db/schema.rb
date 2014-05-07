@@ -11,10 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504044926) do
+ActiveRecord::Schema.define(version: 20140507055326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "drink_ingredients", force: true do |t|
+    t.integer  "drink_id"
+    t.integer  "ingredient_id"
+    t.string   "measure"
+    t.float    "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "drink_ingredients", ["drink_id"], name: "index_drink_ingredients_on_drink_id", using: :btree
+  add_index "drink_ingredients", ["ingredient_id"], name: "index_drink_ingredients_on_ingredient_id", using: :btree
+
+  create_table "drinks", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "instructions"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ingredients", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ingredients", ["name"], name: "index_ingredients_on_name", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",     null: false
