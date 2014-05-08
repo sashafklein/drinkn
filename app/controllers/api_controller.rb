@@ -7,9 +7,7 @@ class ApiController < ApplicationController
   private
 
   def ensure_member!
-    # binding.pry
-    # permission_denied_error unless current_user && user_signed_in?
-    true
+    permission_denied_error unless current_user && user_signed_in?
   end
   
   def permission_denied_error
