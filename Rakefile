@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Vanilla::Application.load_tasks
+Drinkn::Application.load_tasks

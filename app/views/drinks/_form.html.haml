@@ -1,0 +1,19 @@
+= form_for @drink, :html => { :class => "form-horizontal" } do |f|
+  - if @drink.errors.any?
+    .alert.alert-danger.alert-dismissable
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} &times;
+      %h4= "#{pluralize(@drink.errors.count, "error")} prohibited this drink from being saved:"
+
+      %ul
+        - @drink.errors.full_messages.each do |msg|
+          %li= msg
+
+  = render 'layouts/form_group', form: f, attribute: :name, field_type: :text_field
+
+  = render 'layouts/form_group', form: f, attribute: :description, field_type: :text_field
+
+  = render 'layouts/form_group', form: f, attribute: :instructions, field_type: :text_field
+  
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit :class => 'btn btn-primary'

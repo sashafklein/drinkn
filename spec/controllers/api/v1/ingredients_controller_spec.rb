@@ -1,4 +1,4 @@
-describe Drink::IngredientsController do 
+describe Api::V1::IngredientsController do 
   describe 'index' do 
 
     before do 

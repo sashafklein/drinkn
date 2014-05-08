@@ -1,0 +1,20 @@
+.page-header
+  = link_to edit_drink_path(@drink), :class => 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1= @drink.name
+
+%dl.dl-horizontal
+  %dt Description:
+  %dd= @drink.description
+
+  %dt Instructions:
+  %dd= @drink.instructions
+
+%dl.dl-horizontal
+  - @drink.drink_ingredients.each do |ingredient|
+    %dt= link_to ingredient.name, ingredient.source
+    %dd
+      %span
+        = ingredient.number
+        %b= ingredient.measure

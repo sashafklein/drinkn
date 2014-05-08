@@ -1,0 +1,34 @@
+.page-header
+  = link_to @drink, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-info-sign
+    Show
+  %h1 Edit '#{@drink.name}'
+
+= render 'form'
+
+.page-header{ ng_controller: 'DrinkIngredientsCtrl', ng_init: 'fetchIngredients()', ng_show: 'ingredients', ng_cloak: true }
+  %h1 Edit Ingredients
+  %ul
+    %li{ ng_repeat: 'ingredient in ingredients' }
+      .show{ ng_if: '!ingredient.editMode' }
+        %a{ ng_href: '{{ingredient.source_path}}' } 
+          {{ ingredient.name }} 
+          -- 
+          {{ ingredient.number }}
+          %b {{ ingredient.measure }}
+      %form.edit{ ng_if: 'ingredient.editMode' }
+        %a{ ng_href: '{{ingredient.source_path}}' } {{ ingredient.name }}
+
+        %label Quantity
+        %input{ type: 'text', ng_model: 'ingredient.number' }
+
+        %label Measure
+        %input{ type: 'text', ng_model: 'ingredient.measure' }
+
+        %a{ href: '', ng_click: 'delete(ingredient)' }
+          %i.fa.fa-icon-trash
+          Remove Ingredient
+
+      %a.btn.btn-primary{ ng_click: 'ingredient.toggleMode()' } {{ ingredient.toggleText() }}
+    
+
