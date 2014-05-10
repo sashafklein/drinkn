@@ -43,6 +43,6 @@ class Api::V1::DrinksController < ApiController
   end
 
   def render_drink_ingredients
-    render json: @drink.drink_ingredients.map(&:serialize)
+    render json: @drink.drink_ingredients, each_serializer: DrinkIngredientSerializer
   end
 end

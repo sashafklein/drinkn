@@ -13,9 +13,7 @@
       .show{ ng_if: '!di.editMode' }
         %a{ ng_href: '{{di.source_path}}' } 
           {{ di.name }} 
-          -- 
-          {{ di.number }}
-          %b {{ di.measure }}
+        %span -- {{ di.number }} {{ di.measure }}
       %form.edit{ ng_if: 'di.editMode' }
         %a{ ng_href: '{{di.source_path}}' } {{ di.name }}
 
@@ -32,16 +30,16 @@
       %a.btn.btn-primary{ ng_click: 'di.toggleMode()' } {{ di.toggleText() }}
     
   %h1 Add an Ingredient
-  %input{ type: 'text', ng_model: 'ingredientQuery' }
+  %input{ type: 'text', ng_model: 'ingredientQuery.name', ng_change: 'logQuery()' }
   
   .add-ingredient{ ng_show: 'newIngredient' }
     %b.new-ingredient-name {{ newIngredient.name }}
-    %input{ type: 'text', ng_model: 'newIngredientMeasure', placeholder: 'Measure (eg. oz)' }
-    %input{ type: 'text', ng_model: 'newIngredientNumber', placeholder: 'Number (eg. 1.5)'}
+    %input{ type: 'text', ng_model: 'newIngredient.measure', placeholder: 'Measure (eg. oz)' }
+    %input{ type: 'text', ng_model: 'newIngredient.number', placeholder: 'Number (eg. 1.5)'}
     %a.btn.btn-primary{ ng_click: 'addIngredient()', ng_disable: '!newIngredientSpecified' } Add
   
   %ul.available-ingredient-list
-    %li.available-ingredient{ ng_repeat: 'ingredient in filteredAvailableIngredients()', ng_show: 'ingredientQuery.length', ng_click: 'proposeNewIngredient(ingredient)'}
+    %li.available-ingredient{ ng_repeat: 'ingredient in availableIngredients() | filter:ingredientQuery', ng_show: 'ingredientQuery.name', ng_click: 'proposeNewIngredient(ingredient)'}
       %p.ingredient-name {{ ingredient.name }}
       %p.ingredient-description {{ ingredient.description }}
       

@@ -8,14 +8,9 @@ angular.module("Drinks").controller 'DrinkIngredientsCtrl', ($scope, DrinkIngred
       .then( $s._fetchAvailableIngredients )
       .then( $s._fetchAvailableMeasures )
 
-  $s.filteredAvailableIngredients = ->
-    filter = $filter('filter')
-    filter $s._availableIngredients, 
-      name: $s.ingredientQuery
-
   $s.addIngredient = ->
     return unless $s.newIngredientSpecified()
-    $s.drink.add($s.newIngredient, $s.newIngredientMeasure, $s.newIngredientNumber)
+    $s.drink.add($s.newIngredient, $s.newIngredient.measure, $s.newIngredient.number)
       .success (response) ->
         $s._setDrinkIngredients(response)
         $s.resetNewIngredient()
@@ -27,7 +22,7 @@ angular.module("Drinks").controller 'DrinkIngredientsCtrl', ($scope, DrinkIngred
         $s._setDrinkIngredients(response)
       .error (response) -> console.log response
 
-  $s.newIngredientSpecified = -> $s.newIngredient? && $s.newIngredientMeasure? && $s.newIngredientNumber?
+  $s.newIngredientSpecified = -> $s.newIngredient? && $s.newIngredient.measure? && $s.newIngredient.number?
 
   $s.resetNewIngredient = -> 
     $s.newIngredient = null
@@ -37,10 +32,16 @@ angular.module("Drinks").controller 'DrinkIngredientsCtrl', ($scope, DrinkIngred
   $s.proposeNewIngredient = (ingredient) ->
     $s.newIngredient = ingredient
 
+  $s.availableIngredients = -> _($s.allAvailable).reject (ingredient) -> 
+    _.contains($s._preexistingIngredientNames(), ingredient.name)
+
   #########
   # PRIVATE
   #########
 
+  $s.logQuery = -> 
+    console.log $s.ingredientQuery
+    console.log $s.availableIngredients()
   $s._fetchDrink = ->
     drinkId = location.pathname.split('/')[2]
     $s.drink = new Drink({id: drinkId})
@@ -55,13 +56,13 @@ angular.module("Drinks").controller 'DrinkIngredientsCtrl', ($scope, DrinkIngred
   $s._fetchAvailableIngredients = ->
     Ingredient.getAll()
       .success (response) ->
-        rawList = Ingredient.generateFromJSON(response.ingredients)
-        $s._availableIngredients = _(rawList).where (ingredient) ->
-          !_($s.drinkIngredients).find (di) -> di.ingredient == ingredient
+        $s.allAvailable = Ingredient.generateFromJSON(response)
+
+  $s._preexistingIngredientNames = ->
+    _($s.drinkIngredients).map (di) -> di.name
 
   $s._setDrinkIngredients = (data) ->
     $s.drinkIngredients = DrinkIngredient.generateFromJSON(data)
-    window.ing = $s.drinkIngredients
 
   $s._fetchAvailableMeasures = ->
     $s.availableMeasures = Ingredient.availableMeasures
