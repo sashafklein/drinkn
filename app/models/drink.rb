@@ -4,6 +4,8 @@ class Drink < ActiveRecord::Base
 
   def add(ingredient, measure, number)
     drink_ingredients.where(ingredient_id: ingredient.id).first_or_create!(measure: measure, number: number)
+  rescue
+    false
   end
 
   def remove(ingredient)

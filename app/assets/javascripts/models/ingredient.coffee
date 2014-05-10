@@ -8,6 +8,7 @@ angular.module('Models').factory 'Ingredient', (BaseModel, $http) ->
 
     @availableMeasures: ['oz', 'dash', 'peel', 'drop']
 
+    @getAll: -> return $http.get('/api/v1/ingredients')
     @generateFromJSON: (json) -> BaseModel.generateFromJSON(Ingredient, json)
 
   return Ingredient

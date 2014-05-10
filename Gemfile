@@ -25,7 +25,7 @@ end
 
 group :test do 
   gem 'rspec-rails'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '1.0.1'
   gem 'timecop'
   gem 'capybara'
   gem 'capybara-webkit'

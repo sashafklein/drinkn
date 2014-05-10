@@ -29,7 +29,7 @@
           %i.fa.fa-icon-trash
           Remove Ingredient
 
-      %a.btn.btn-primary{ ng_click: 'ingredient.toggleMode()' } {{ ingredient.toggleText() }}
+      %a.btn.btn-primary{ ng_click: 'di.toggleMode()' } {{ di.toggleText() }}
     
   %h1 Add an Ingredient
   %input{ type: 'text', ng_model: 'ingredientQuery' }
@@ -38,7 +38,7 @@
     %b.new-ingredient-name {{ newIngredient.name }}
     %input{ type: 'text', ng_model: 'newIngredientMeasure', placeholder: 'Measure (eg. oz)' }
     %input{ type: 'text', ng_model: 'newIngredientNumber', placeholder: 'Number (eg. 1.5)'}
-    %a.btn.btn-primary{ ng_click: 'addIngredient()', ng_disable: '!newIngredientSpecified' }
+    %a.btn.btn-primary{ ng_click: 'addIngredient()', ng_disable: '!newIngredientSpecified' } Add
   
   %ul.available-ingredient-list
     %li.available-ingredient{ ng_repeat: 'ingredient in filteredAvailableIngredients()', ng_show: 'ingredientQuery.length', ng_click: 'proposeNewIngredient(ingredient)'}

@@ -29,7 +29,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -41,48 +41,4 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
-
-
-  # Memory Settings
-  config.before(:all) do
-    DeferredGarbageCollection.start
-  end
-
-  config.after(:all) do
-    DeferredGarbageCollection.reconsider
-  end
-
-  config.before(:selenium => true) do
-    Capybara.current_driver = :chrome
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.after(:selenium => true) do
-    Capybara.current_driver = :webkit
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  # Database Cleaner
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation) #clean once with truncation
-  end
-
-  # Use truncation strategy for JS tests
-  config.before(:js => true) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  # Switch back to transaction
-  config.after(:js => true) do
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
 end

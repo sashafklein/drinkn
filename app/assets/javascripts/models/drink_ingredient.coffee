@@ -1,4 +1,4 @@
-angular.module('Models').factory 'DrinkIngredient', (BaseModel) ->
+angular.module('Models').factory 'DrinkIngredient', (BaseModel, Ingredient) ->
 
   class DrinkIngredient extends BaseModel
 
@@ -9,7 +9,9 @@ angular.module('Models').factory 'DrinkIngredient', (BaseModel) ->
 
     editMode: false
 
-    toggleMode: -> @editMode = !@editMode
+    toggleMode: -> 
+      @editMode = !@editMode
+      console.log @editMode
     toggleText: -> if @editMode then 'Save' else 'Edit'
 
     @generateFromJSON: (json) -> BaseModel.generateFromJSON(DrinkIngredient, json)

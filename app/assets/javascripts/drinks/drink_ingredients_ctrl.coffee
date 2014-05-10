@@ -53,7 +53,7 @@ angular.module("Drinks").controller 'DrinkIngredientsCtrl', ($scope, DrinkIngred
         console.log(response)
 
   $s._fetchAvailableIngredients = ->
-    $s.drink.getAvailableIngredients()
+    Ingredient.getAll()
       .success (response) ->
         rawList = Ingredient.generateFromJSON(response.ingredients)
         $s._availableIngredients = _(rawList).where (ingredient) ->
@@ -61,6 +61,7 @@ angular.module("Drinks").controller 'DrinkIngredientsCtrl', ($scope, DrinkIngred
 
   $s._setDrinkIngredients = (data) ->
     $s.drinkIngredients = DrinkIngredient.generateFromJSON(data.drink_ingredients)
+    window.ing = $s.drinkIngredients
 
   $s._fetchAvailableMeasures = ->
     $s.availableMeasures = Ingredient.availableMeasures
