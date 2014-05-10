@@ -14,7 +14,7 @@ describe Api::V1::DrinksController do
 
     it "pulls the associated drink ingredients" do
       get :drink_ingredients, id: @drink.id
-      resp = JSON.parse(response.body)['drink_ingredients']
+      resp = JSON.parse(response.body)
       resp.count.should == @drink.drink_ingredients.count
     end
   end

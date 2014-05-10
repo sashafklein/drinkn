@@ -13,7 +13,7 @@ describe Api::V1::IngredientsController do
       get :index
       resp = JSON.parse(response.body)
 
-      resp['ingredients'].map{ |i| i['name'] }.sort.should == ['Angostura Bitters', 'Bourbon', 'Orange Peel', 'Vermouth']
+      resp.map{ |i| i['name'] }.sort.should == ['Angostura Bitters', 'Bourbon', 'Orange Peel', 'Vermouth']
     end
   end
 end

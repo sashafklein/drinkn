@@ -9,9 +9,8 @@ angular.module('Models').factory 'DrinkIngredient', (BaseModel, Ingredient) ->
 
     editMode: false
 
-    toggleMode: -> 
-      @editMode = !@editMode
-      console.log @editMode
+    toggleMode: -> @editMode = !@editMode
+
     toggleText: -> if @editMode then 'Save' else 'Edit'
 
     @generateFromJSON: (json) -> BaseModel.generateFromJSON(DrinkIngredient, json)

@@ -60,7 +60,7 @@ angular.module("Drinks").controller 'DrinkIngredientsCtrl', ($scope, DrinkIngred
           !_($s.drinkIngredients).find (di) -> di.ingredient == ingredient
 
   $s._setDrinkIngredients = (data) ->
-    $s.drinkIngredients = DrinkIngredient.generateFromJSON(data.drink_ingredients)
+    $s.drinkIngredients = DrinkIngredient.generateFromJSON(data)
     window.ing = $s.drinkIngredients
 
   $s._fetchAvailableMeasures = ->
