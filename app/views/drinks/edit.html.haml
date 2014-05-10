@@ -6,29 +6,42 @@
 
 = render 'form'
 
-.page-header{ ng_controller: 'DrinkIngredientsCtrl', ng_init: 'fetchIngredients()', ng_show: 'ingredients', ng_cloak: true }
+.page-header{ ng_controller: 'DrinkIngredientsCtrl', ng_init: 'init()', ng_show: 'drinkIngredients', ng_cloak: true }
   %h1 Edit Ingredients
   %ul
-    %li{ ng_repeat: 'ingredient in ingredients' }
-      .show{ ng_if: '!ingredient.editMode' }
-        %a{ ng_href: '{{ingredient.source_path}}' } 
-          {{ ingredient.name }} 
+    %li{ ng_repeat: 'di in drinkIngredients' }
+      .show{ ng_if: '!di.editMode' }
+        %a{ ng_href: '{{di.source_path}}' } 
+          {{ di.name }} 
           -- 
-          {{ ingredient.number }}
-          %b {{ ingredient.measure }}
-      %form.edit{ ng_if: 'ingredient.editMode' }
-        %a{ ng_href: '{{ingredient.source_path}}' } {{ ingredient.name }}
+          {{ di.number }}
+          %b {{ di.measure }}
+      %form.edit{ ng_if: 'di.editMode' }
+        %a{ ng_href: '{{di.source_path}}' } {{ di.name }}
 
         %label Quantity
-        %input{ type: 'text', ng_model: 'ingredient.number' }
+        %input{ type: 'text', ng_model: 'di.number' }
 
         %label Measure
-        %input{ type: 'text', ng_model: 'ingredient.measure' }
+        %input{ type: 'text', ng_model: 'di.measure' }
 
-        %a{ href: '', ng_click: 'delete(ingredient)' }
+        %a{ href: '', ng_click: 'remove(di)' }
           %i.fa.fa-icon-trash
           Remove Ingredient
 
       %a.btn.btn-primary{ ng_click: 'ingredient.toggleMode()' } {{ ingredient.toggleText() }}
     
-
+  %h1 Add an Ingredient
+  %input{ type: 'text', ng_model: 'ingredientQuery' }
+  
+  .add-ingredient{ ng_show: 'newIngredient' }
+    %b.new-ingredient-name {{ newIngredient.name }}
+    %input{ type: 'text', ng_model: 'newIngredientMeasure', placeholder: 'Measure (eg. oz)' }
+    %input{ type: 'text', ng_model: 'newIngredientNumber', placeholder: 'Number (eg. 1.5)'}
+    %a.btn.btn-primary{ ng_click: 'addIngredient()', ng_disable: '!newIngredientSpecified' }
+  
+  %ul.available-ingredient-list
+    %li.available-ingredient{ ng_repeat: 'ingredient in filteredAvailableIngredients()', ng_show: 'ingredientQuery.length', ng_click: 'proposeNewIngredient(ingredient)'}
+      %p.ingredient-name {{ ingredient.name }}
+      %p.ingredient-description {{ ingredient.description }}
+      

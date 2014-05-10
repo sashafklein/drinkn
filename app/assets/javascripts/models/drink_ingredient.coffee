@@ -4,6 +4,7 @@ angular.module('Models').factory 'DrinkIngredient', (BaseModel) ->
 
     constructor: (_properties) ->
       properties = _(_properties).clone()
+      @ingredient = @extractHasOneRelation(Ingredient, properties, 'ingredient')
       _.extend(this, properties)
 
     editMode: false

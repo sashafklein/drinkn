@@ -1,5 +1,5 @@
 class DrinkIngredientSerializer < BaseSerializer
-  attributes :id, :number, :measure, :name, :source_path
+  attributes :id, :number, :measure, :name, :source_path, :ingredient
 
   def name
     object.name
@@ -7,5 +7,9 @@ class DrinkIngredientSerializer < BaseSerializer
 
   def source_path
     ingredient_path(object.ingredient)
+  end
+
+  def ingredient
+    IngredientSerializer.new(object.ingredient)
   end
 end

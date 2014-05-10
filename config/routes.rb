@@ -11,7 +11,11 @@ Drinkn::Application.routes.draw do
     namespace :v1 do
       resources :ingredients
       resources :drinks do 
-        get :drink_ingredients, on: :member
+        member do 
+          get :drink_ingredients
+          post :add
+          post :remove
+        end
       end
     end
   end
